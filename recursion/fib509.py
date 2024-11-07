@@ -39,6 +39,10 @@ print(solution.fib(2))  # Output: 1
 print(solution.fib(3))  # Output: 2
 print(solution.fib(4))  # Output: 3
 
+if __name__ == "__main__":
+    solution = Solution()
+    result = solution.fib(3)
+    print(result)
 
 """
 Time Complexity: O(n^2)
