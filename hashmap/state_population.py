@@ -1,53 +1,48 @@
-class StatePopulationMap:
+class StatePopulation:
     def __init__(self):
-        # Initialize an empty dictionary to act as the hashmap
         self.population_map = {}
 
-    def add_state(self, state, population):
-        """Adds or updates the population of a state."""
+    def add_data(self, state, population):
         self.population_map[state] = population
-        print(f"{state} added with population {population}")
 
-    def get_population(self, state):
-        """Retrieves the population of a state."""
-        return self.population_map.get(state, "State not found")
-
-    def remove_state(self, state):
-        """Removes a state from the hashmap."""
-        if state in self.population_map:
-            del self.population_map[state]
-            print(f"{state} removed.")
+    def get_data(self, state):
+        if not self.isEmpty():
+            if state in self.population_map:
+                print(f'Value of {state} is {self.population_map[state]}')
+            else:
+                print(f'{state} not found')
         else:
-            print("State not found in the map.")
+            print('Map is empty')
+
+    def remove_data(self, state):
+        if not self.isEmpty():
+            if state in self.population_map:
+                del self.population_map[state]
+                print(f'{state} is removed.')
+            else:
+                print(f'{state} not found.')
+        else:
+            print('Map is empty')
+            
+    def update_data(self, state, population):
+        self.population_map[state] = population
 
     def display_all(self):
-        """Displays all states and their populations."""
-        if not self.population_map:
-            print("No states in the map.")
-        else:
+        if not self.isEmpty():
             for state, population in self.population_map.items():
-                print(f"State: {state}, Population: {population}")
+                print(f'{state} : {population}')
+        else:
+            print('Map is empty')
 
-# Example usage
-if __name__ == "__main__":
-    # Create an instance of the class
-    state_population = StatePopulationMap()
-    
-    # Add states with populations
-    state_population.add_state("California", 39538223)
-    state_population.add_state("Texas", 29145505)
-    state_population.add_state("Florida", 21538187)
+    def isEmpty(self):
+        return not self.population_map
 
-    # Retrieve population of a specific state
-    print(f"Population of Texas: {state_population.get_population('Texas')}")
-    
-    # Display all states and populations
-    print("\nAll states and populations:")
-    state_population.display_all()
-    
-    # Remove a state
-    state_population.remove_state("Florida")
-
-    # Display all states and populations after removal
-    print("\nAll states and populations after removal:")
+if __name__ == '__main__':
+    state_population = StatePopulation()
+    state_population.add_data('Texas', 10000)    
+    state_population.add_data('New York', 20000)    
+    state_population.add_data('California', 30400)
+    state_population.get_data('Texas')
+    state_population.remove_data('New York')
+    state_population.update_data('New Jersey', 5000)
     state_population.display_all()
