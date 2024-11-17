@@ -21,31 +21,31 @@ Explanation: The longest sub-array with sum equal to 0 is {0}
 def max_len(arr):
   
     # Map to store the previous sums
-    presum = {}
+    map = {}
 
-    sum = 0
-    max_len = 0
+    currsum = 0
+    ans = 0
 
     # Traverse through the given array
     for i in range(len(arr)):
       
-        # Add current element to sum
-        sum += arr[i]
+        # Add current element to currsum
+        currsum += arr[i]
 
-        # If the sum is 0, update max_len
-        if sum == 0:
-            max_len = i + 1
+        # If the currsum is 0, update ans
+        if currsum == 0:
+            ans = i + 1
 
-        # Check if this sum is seen before
-        if sum in presum:
-            # If this sum is seen before, update max_len
-            max_len = max(max_len, i - presum[sum])
+        # Check if this currsum is seen before
+        if currsum in map:
+            # If this currsum is seen before, update ans
+            ans = max(ans, i - map[currsum])
         else:
           
-            # If this sum is not seen before, add it to the map
-            presum[sum] = i
+            # If this currsum is not seen before, add it to the map
+            map[currsum] = i
 
-    return max_len
+    return ans
 
 arr = [15, -2, 2, -8, 1, 7, 10, 23]
 print(max_len(arr))
